@@ -5,7 +5,7 @@ import classes from "./SearchMovie.module.css";
 export default function SearchMovie(props) {
   const [query, setQuery] = useState();
   const [results, setResults] = useState([]);
- // const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   // const searchMovies = async (e) => {
   //   e.preventDefault();
@@ -37,7 +37,7 @@ export default function SearchMovie(props) {
         console.log(data);
         // setIsLoaded(true);
         setResults(data.results);
-        //setIsVisible(true);
+        setIsVisible(true);
       }
         catch (err) {
           console.error(err);
@@ -53,6 +53,7 @@ export default function SearchMovie(props) {
 
   const onSelectHandler = (movie) => {
     //setIsVisible(query.length() > 1);
+    setIsVisible(false);
     return props.onSelect(movie);
   };
 
@@ -76,7 +77,7 @@ export default function SearchMovie(props) {
           </button>
         )} */}
       </form>
-      {results != null && <Results results={results} onSelect={onSelectHandler} />}
+      {results.length > 0 && isVisible && <Results results={results} onSelect={onSelectHandler} />}
     </>
   );
 }
