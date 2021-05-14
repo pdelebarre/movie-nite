@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
+import classes from "./Movie.module.css";
+import { RiDeleteBin6Line } from "react-icons/ri";
+
+import Overview from './Overview';
 
 const Movie = (props) => {
+  const [details, setDetails] = useState(false);
   const onDeleteHandler = () => {
     props.delMovie(props.movie.id);
     console.log(`delete`, props.movie.id);
@@ -10,39 +15,46 @@ const Movie = (props) => {
     props.markWatched(props.movie.id);
   };
 
-  //   const getImage = () => {
-  //     let imageUrl = `https://image.tmdb.org/t/p/original${props.movie.poster_path}`;
-  //     console.log(`url`, imageUrl);
-  //     return imageUrl;
-  //   };
+  const onClickHandler = () => {
+    setDetails(true);
+  };
 
-  //const url=props.movie.poster_path;//"/wuMc08IPKEatf9rnMNXvIDxqP4W.jpg";
+  const onMouseLeaveHandler = () => {
+    setDetails(false);
+  };
+
   return (
-    <tr>
-      <td>
-        <input
-          name="watched"
-          type="checkbox"
-          onChange={onCheckHandler}
-          checked={props.movie.watched}
-          value={props.movie.watched}
-        />
-      </td>
-      <td>{props.movie.id}</td>
-      <td>{props.movie.title}</td>
-      <td>{props.movie.genre}</td>
-      <td>
-        <img
-          src={`https://image.tmdb.org/t/p/original${props.movie.poster_path}`}
-          alt="poster"
-          width="30"
-          height="45"
-        />
-      </td>
-      <td>
-        <button onClick={onDeleteHandler}>Delete</button>
-      </td>
-    </tr>
+    <>
+      <tr onClick={onClickHandler} onMouseOver={onClickHandler} onMouseLeave={onMouseLeaveHandler}>
+        <td className={classes.watched}>
+          <input
+            name="watched"
+            type="checkbox"
+            onChange={onCheckHandler}
+            checked={props.movie.watched}
+            value={props.movie.watched}
+          />
+        </td>
+        <td>{props.movie.title}</td>
+        <td>{props.movie.genres}</td>
+        <td className={classes.poster}>
+          <img
+            className={classes.poster}
+            src={`https://image.tmdb.org/t/p/original${props.movie.poster_path}`}
+            alt="poster"
+          />
+        </td>
+        <td className={classes["delete-button"]}>
+          <RiDeleteBin6Line onClick={onDeleteHandler} />
+        </td>
+      </tr>
+
+      {details && (
+        <tr>
+          <td colSpan="5"><Overview movie = {props.movie}/></td>
+        </tr>
+      )}
+    </>
   );
 };
 
