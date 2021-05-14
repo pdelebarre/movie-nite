@@ -3,7 +3,7 @@ import Results from "../Search/Results";
 import classes from "./SearchMovie.module.css";
 
 export default function SearchMovie(props) {
-  const [query, setQuery] = useState();
+  const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -41,6 +41,7 @@ export default function SearchMovie(props) {
       }
         catch (err) {
           console.error(err);
+          setIsVisible(false);
         }
     }, [1000]);
 
@@ -48,7 +49,11 @@ export default function SearchMovie(props) {
   }, [query]);
 
   const onChangeHandler = (event) => {
+    // if(!event.target.value) {
+    //   setIsVisible(false);
+    // } ;
     setQuery(event.target.value);
+      
   };
 
   const onSelectHandler = (movie) => {
@@ -59,7 +64,7 @@ export default function SearchMovie(props) {
 
   return (
     <>
-      <form className={classes["search-form"]}>
+      {/* <form className={classes["search-form"]}> */}
         <label className={classes["search-label"]} htmlFor="query">
           Movie Name
         </label>
@@ -76,8 +81,8 @@ export default function SearchMovie(props) {
             Search
           </button>
         )} */}
-      </form>
-      {results.length > 0 && isVisible && <Results results={results} onSelect={onSelectHandler} />}
+      {/* </form> */}
+      {isVisible && results && results.length > 0 && <Results results={results} onSelect={onSelectHandler} />}
     </>
   );
 }
