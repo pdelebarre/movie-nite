@@ -34,8 +34,7 @@ export default function SearchMovie(props) {
         
         const res = await fetch(url);
         const data = await res.json();
-        console.log(data);
-        // setIsLoaded(true);
+        console.log(data)
         setResults(data.results);
         setIsVisible(true);
       }
@@ -43,7 +42,7 @@ export default function SearchMovie(props) {
           console.error(err);
           setIsVisible(false);
         }
-    }, [1000]);
+    }, [1000, query.length > 0]);
 
     return () => clearTimeout(delayDebounceFn);
   }, [query]);

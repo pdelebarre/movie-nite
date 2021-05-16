@@ -1,70 +1,22 @@
-/* .panel {
-    background-color:rgb(210, 59, 134);
+.container {
+    /* background-color: rgb(243, 219, 231); */
+    background: linear-gradient(to bottom, #FFC7D8 0%, #FFFFFF 71%, #DDEAED 100%);
     width: 100%;
     border-radius: 50px;
-    background-color: rgb(25, 19, 140);
-    color: white;
-    margin: 10px;
-    border: 10px;
-    padding: 10px;
+    margin: 0px;
+    border: 0px;
+    padding: 0px;
     box-shadow: 13px 15px 28px -3px rgba(0, 0, 0, 0.72);
-} */
-
-.grid-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 0.2fr 1.8fr;
-    gap: 0px 0px;
-    grid-template-areas:
-        "title"
-        "details";
-    background-color: rgb(190, 51, 123);
-    width: 100%;
-    border-radius: 50px;
-    margin: 10px;
-    border: 10px;
-    padding: 10px;
-}
-
-.title {
-    grid-area: title;
-    font-size: 1em;
-    text-align: center;
-    /* width: 100%; */
-    border-radius: 50px;
-    background-color: rgb(128, 0, 255);
-    color: white;
-    margin: 10px;
-    border: 10px;
-    padding-top: 50px;
-    padding: 5px;
-    box-shadow: 13px 15px 28px -3px rgba(0, 0, 0, 0.72);
-}
-
-.details {
-    grid-area: overview;
-    font-size: 0.8em;
-    text-align: left;
-    justify-content: stretch;
-    line-height: normal;
-    width: 100%;
-    border-radius: 50px;
-    background-color: rgb(108, 81, 136);
-    color: white;
-    margin: 10px;
-    border: 10px;
-    padding: 20px;
-    box-shadow: 13px 15px 28px -3px rgba(0, 0, 0, 0.72);
-
 }
 
 .poster {
-    min-width: 100px;
+    min-width: 30px;
     max-width: 25%;
-    min-height: 150px;
+    min-height: 45px;
     border-radius: 50px;
     float: left;
-    padding: 0 0px 0 0;
+    margin:20px;
+    padding: 0 20px 0 0;
 }
 
 .overview {
@@ -72,7 +24,17 @@
     margin: 10px;
     border: 10px;
     padding: 10px;
-    border-radius: 50px;
-    /* background-color: rgb(250, 197, 234); */
-    background: linear-gradient(to bottom, #FFC7D8 0%, #FFFFFF 71%, #DDEAED 100%);
+    /* border-radius: 50px; */
+}
+
+h2 {
+    /* border-radius: 50px; */
+    /* background-color: rgb(128, 0, 255); */
+    color: rgb(21, 19, 19);
+    text-align: right;
+    margin: 10px;
+    border: 10px;
+    padding-top: 50px;
+    padding: 5px;
+    /* box-shadow: 13px 15px 28px -3px rgba(0, 0, 0, 0.72); */
 }

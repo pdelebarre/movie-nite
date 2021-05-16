@@ -40,7 +40,7 @@ const Movie = (props) => {
         <td className={classes.poster}>
           <img
             className={classes.poster}
-            src={`https://image.tmdb.org/t/p/original${props.movie.poster_path}`}
+            src={`https://image.tmdb.org/t/p/original${props.movie.posterpath}`}
             alt="poster"
           />
         </td>

@@ -6,10 +6,12 @@ html {
   box-sizing: border-box;
 }
 
+
+
 body {
   margin: 0;
   padding: 0;
-  background-color: rgb(244,244,244);
+  background-color: rgb(244, 244, 244);
   color: #333;
 }
 
@@ -25,10 +27,6 @@ small {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -55,6 +53,7 @@ small {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

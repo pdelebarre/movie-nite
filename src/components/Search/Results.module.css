@@ -8,8 +8,10 @@
 }
 
 .dropdown {
-    /* position: relative;
-    display: inline-block; */
+    position: relative;
+    /* display: inline-block; */
+    text-align: center;
+    padding-left: 150px;
 }
 
 .dropdown-content {
