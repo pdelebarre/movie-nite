@@ -1,14 +1,11 @@
-import React from "react";
-import SearchMovie from "./Movie/SearchMovie";
+import React, { useState } from "react";
 
+import SearchMovie from "./Movie/SearchMovie";
 import classes from "./Movies.module.css";
 import Movie from "./Movie/Movie";
 
 import { useEasybase } from "easybase-react";
-
 import ebconfig from "../ebconfig.js";
-
-import { useState, useEffect } from "react";
 
 import GENRES from "../resources/genres";
 
@@ -28,16 +25,10 @@ const getGenres = (genre_ids) => {
 const Main = () => {
   const [refresh, setRefresh] = useState(false);
 
+  const { db, e, useReturn } = useEasybase();
   const table = useEasybase({ ebconfig }).db("MOVIES");
 
-  const { db, e, useReturn } = useEasybase();
-
-  // 1st param is a function, returning a `db().return` instance without having been executed
-  // 2nd param is dependencies that cause a re-fetch when changed
   const { frame } = useReturn(() => db().return(), [refresh]);
-
-  console.log("List of movies");
-  console.log(frame);
 
   const headers = (
     <thead>
@@ -50,41 +41,6 @@ const Main = () => {
       </tr>
     </thead>
   );
-
-  // use easybase's hooks to access the data.
-  //   const { Frame, useFrameEffect, configureFrame, sync } = useEasybase();
-  //   // const [movies, setMovies] = useState([]);
-
-  //   useEffect(() => {
-  //     // configureFrame sets up our Frame to access the appropriate list of data.
-  //     // in this case, it's only showing the first 10 rows, for the table LISTOFDATA
-  //     configureFrame({ limit: 10, offset: 0, tableName: "MOVIES" });
-  //     sync();
-  //     // this *should* be [configureFrame, sync] because we want the useEffect hook to fire if
-  //     // those values change. However, easybase-react *always* updates them, so we need to pass
-  //     // an empty array. And then disable the warning in the linter. I consider this a bug in easybase.
-  //     // eslint-disable-next-line
-  //   }, []);
-
-  //   useFrameEffect(() => {
-  //     console.log("Frame changed!");
-  //   });
-
-  //   useEffect(() => {
-  //     mounted();
-  //   }, [])
-
-  //   const { frame } = useReturn(() => {
-  //     console.log("getting data...");
-  //     db("MOVIES").return();
-  //     console.log(`movies`, frame);
-  //   }, []);
-
-  //   const movieExists = (id) => {
-  //     return movies.some((movie) => {
-  //       return movie.id === id;
-  //     });
-  //   };
 
   const addMovie = async (movie) => {
     //     if (movieExists(movie.id)) {
@@ -135,7 +91,6 @@ const Main = () => {
   return (
     <div className={classes.container}>
       <SearchMovie onSelect={addMovie} />
-      {/* <Movies movies={Frame()} delMovie={delMovie} markWatched={markWatched} /> */}
 
       <table className={classes.movies}>
         {headers}
