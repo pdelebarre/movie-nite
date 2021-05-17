@@ -25,7 +25,7 @@ const getGenres = (genre_ids) => {
 const Main = () => {
   const [refresh, setRefresh] = useState(false);
 
-  const { db, e, useReturn } = useEasybase();
+  const { e, useReturn } = useEasybase();
   const table = useEasybase({ ebconfig }).db("MOVIES");
 
   const { frame } = useReturn(
