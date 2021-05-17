@@ -28,7 +28,10 @@ const Main = () => {
   const { db, e, useReturn } = useEasybase();
   const table = useEasybase({ ebconfig }).db("MOVIES");
 
-  const { frame } = useReturn(() => db().return(), [refresh]);
+  const { frame } = useReturn(
+    () => table().orderBy({ by: "watched", sort: "asc" }).return(),
+    [refresh]
+  );
 
   const headers = (
     <thead>
@@ -42,11 +45,16 @@ const Main = () => {
     </thead>
   );
 
+  const movieExists = async (id) => {
+    let singleRecord = await table.return().where(e.eq("id", id)).one();
+    return singleRecord === null;
+  };
+
   const addMovie = async (movie) => {
-    //     if (movieExists(movie.id)) {
-    //       console.log(`duplicate!`, movie);
-    //       return;
-    //     }
+    if (movieExists(movie.id)) {
+      console.log(`duplicate!`, movie);
+      return;
+    }
 
     let genres = getGenres(movie.genre_ids);
     try {
@@ -90,6 +98,7 @@ const Main = () => {
 
   return (
     <div className={classes.container}>
+      {/* TODO:fix first call and call when non empty */}
       <SearchMovie onSelect={addMovie} />
 
       <table className={classes.movies}>
