@@ -29,7 +29,7 @@ const SearchMovie = (props) => {
       <div className={classes.searchbar}>
         <form onSubmit={handleSubmit}>
           <label className={classes.label}>
-            Movie:
+            Search Movie:
             <input className={classes.input} type="text" value={query} onChange={handleChange} />
           </label>
           <input className={classes.button} type="submit" value="OK" />

@@ -8,7 +8,7 @@ import LogInForm from "./components/LoginForm";
 import SearchMovie from "./components/Movie/SearchMovie";
 import MovieList from "./components/Movie/MovieList";
 
-import TestMongo from "./tests/TestMongo";
+// import TestMongo from "./tests/TestMongo";
 
 import GENRES from "./resources/genres";
 
@@ -33,7 +33,7 @@ function App() {
 
   const [refresh, setRefresh] = useState(false);
 
-  const addMovie = async ({ movie }) => {
+  const addMovie = async (movie) => {
     console.log(`adding `, movie);
 
     const genres = getGenres(movie.genre_ids);
@@ -43,9 +43,9 @@ function App() {
         id: movie.id,
         title: movie.title,
         genres: genres,
-        posterpath: movie.poster_path,
+        poster_path: movie.poster_path,
         overview: movie.overview,
-        voteaverage: Number(movie.vote_average),
+        vote_average: Number(movie.vote_average),
         watched: false,
       })
       .then((result) =>
@@ -69,30 +69,32 @@ function App() {
   }
 
   const onAddHandler = (movie) => {
-    console.log(`in App, adding: `, movie)
-    // addMovie(movie);
-  }
+    console.log(`in App, adding: `, movie);
+    addMovie(movie);
+    setRefresh(st=>!st);
+  };
 
-  // return user && db && user.state === "active" ? (
-  return (
+  return user && db && user.state === "active" ? (
     <div className={classes.contain}>
-     
+      <MovieList
+        className={classes.row}
+        movies={movies}
+        user={user}
+        logOut={logOut}
+      />
       <SearchMovie className={classes.row} onAddHandler={onAddHandler} />
-      <MovieList className={classes.row} movies={movies} user={user} logOut={logOut} />
 
       {/* <TestMongo /> */}
     </div>
+  ) : (
+    <LogInForm
+      email={email}
+      setEmail={setEmail}
+      password={password}
+      setPassword={setPassword}
+      handleLogIn={handleLogIn}
+    />
   );
-
-  //  : (
-  //   <LogInForm
-  //     email={email}
-  //     setEmail={setEmail}
-  //     password={password}
-  //     setPassword={setPassword}
-  //     handleLogIn={handleLogIn}
-  //   />
-  // );
 }
 
 export default App;
