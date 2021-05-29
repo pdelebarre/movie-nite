@@ -1,87 +1,48 @@
-import React, { useState, useEffect } from "react";
-import Results from "../Search/Results";
+import React, { useState } from "react";
+
 import classes from "./SearchMovie.module.css";
 
-export default function SearchMovie(props) {
+import Dropdown from "./Dropdown";
+
+const SearchMovie = (props) => {
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState([]);
-  const [isVisible, setIsVisible] = useState(false);
+  const [newMovie, setNewMovie] = useState({});
 
-  // const searchMovies = async (e) => {
-  //   e.preventDefault();
-  //   console.log("submitting");
-
-  //   const url = `https://api.themoviedb.org/3/search/movie?api_key=5dcf7f28a88be0edc01bbbde06f024ab&language=en-US&query=${query}&page=1&include_adult=false`;
-
-  //   try {
-  //     const res = await fetch(url);
-  //     const data = await res.json();
-  //     console.log(data);
-  //     setResults(data.results);
-  //     //setIsVisible(true);
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
-
-  useEffect(() => {
-    const delayDebounceFn = setTimeout(async () => {
-      //e.preventDefault();
-      console.log(query);
-      const url = `https://api.themoviedb.org/3/search/movie?api_key=5dcf7f28a88be0edc01bbbde06f024ab&language=en-US&query=${query}&page=1&include_adult=false`;
-      try{
-
-        
-        const res = await fetch(url);
-        const data = await res.json();
-        console.log(data)
-        setResults(data.results);
-        setIsVisible(true);
-      }
-        catch (err) {
-          console.error(err);
-          setIsVisible(false);
-        }
-    }, [1000, query.length > 0]);
-
-    return () => clearTimeout(delayDebounceFn);
-  }, [query]);
-
-  const onChangeHandler = (event) => {
-    // if(!event.target.value) {
-    //   setIsVisible(false);
-    // } ;
+  const handleSubmit = () => {
+    console.log("submit", newMovie);
+    //alert(movie);
+    setNewMovie({});
+    setQuery("");
+  };
+  const handleChange = (event) => {
     setQuery(event.target.value);
-      
   };
 
-  const onSelectHandler = (movie) => {
-    //setIsVisible(query.length() > 1);
-    setIsVisible(false);
-    return props.onSelect(movie);
+  const onAddHandler = (movie) => {
+    setNewMovie(movie);
+    console.log("received from child", newMovie);
+    props.onAddHandler(movie);
   };
 
   return (
-    <>
-      {/* <form className={classes["search-form"]}> */}
-        <label className={classes["search-label"]} htmlFor="query">
-          Movie Name
-        </label>
-        <input
-          className={classes["search-input"]}
-          type="text"
-          name="query"
-          placeholder="i.e. Jurassic Park"
-          onChange={onChangeHandler}
-          value={query}
-        />
-        {/* {query.length > 0 && (
-          <button className={classes["search-button"]} type="submit">
-            Search
-          </button>
-        )} */}
-      {/* </form> */}
-      {isVisible && results && results.length > 0 && <Results results={results} onSelect={onSelectHandler} />}
-    </>
+    <div className={classes.contain}>
+      <div className={classes.searchbar}>
+        <form onSubmit={handleSubmit}>
+          <label className={classes.label}>
+            Movie:
+            <input className={classes.input} type="text" value={query} onChange={handleChange} />
+          </label>
+          <input className={classes.button} type="submit" value="OK" />
+        </form>
+      </div>
+
+      <div className={classes.row}>
+        {query && <Dropdown onAddHandler={onAddHandler} query={query} />}
+      </div>
+
+      
+    </div>
   );
-}
+};
+
+export default SearchMovie;

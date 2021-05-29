@@ -1,0 +1,134 @@
+body,
+html {
+  padding: 0 10px;
+  margin: 0;
+  background: #0e0f11;
+  color: #ecf0f1;
+  font-family: 'Open Sans', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+* {
+  box-sizing: border-box;
+}
+h1,
+p {
+  text-align: center;
+}
+p {
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+}
+a:link,
+a:hover,
+a:active,
+a:visited {
+  transition: color 150ms;
+  color: #95a5a6;
+  text-decoration: none;
+}
+a:hover {
+  color: #7f8c8d;
+  text-decoration: underline;
+}
+
+.row {
+  overflow: scroll;
+  width: 100%;
+}
+.row__inner {
+  transition: 450ms transform;
+  font-size: 0;
+  white-space: nowrap;
+  margin: 70.3125px 0;
+  padding-bottom: 10px;
+}
+.tile {
+  position: relative;
+  display: inline-block;
+  width: 250px;
+  height: 350px;
+  margin-right: 10px;
+  font-size: 20px;
+  /* cursor: pointer; */
+  transition: 450ms all;
+  transform-origin: center left;
+  color: white
+}
+.tile__img {
+  width: 250px;
+  height: 350px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.tile__details {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 0;
+  top: 0;
+  font-size: 16px;
+  opacity: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(255,255,255,0) 15%, rgba(255,255,255,0) 85%, rgba(0,0,0,1) 100%);
+  /* linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%); */
+  transition: 450ms opacity;
+}
+.tile__details:after,
+.tile__details:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: #000;
+}
+
+.tile__details:before {
+  position: absolute;
+  left: 20px;
+  width: 100%;
+  font-size: 30px;
+  margin-left: 100px;
+  margin-top: 100px;
+  bottom: 20px;
+  text-align: center;
+  z-index: 2;
+}
+.tile:hover .tile__details {
+  opacity: 1;
+}
+.tile__title {
+  position: absolute;
+  bottom: 0;
+  padding: 10px;
+}
+.tile__more {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 10px;
+  text-align: right;
+}
+.tile__add {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 10px;
+  text-align: right;
+}
+.row__inner:hover {
+  transform: translate3d(-62.5px, 0, 0);
+}
+.row__inner:hover .tile {
+  opacity: 0.3;
+}
+.row__inner:hover .tile:hover {
+  transform: scale(1.5);
+  opacity: 1;
+}
+.tile:hover ~ .tile {
+  transform: translate3d(125px, 0, 0);
+}
