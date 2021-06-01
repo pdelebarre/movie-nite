@@ -85,9 +85,16 @@ a:hover {
   padding: 10px;
   text-align: right;
 }
-.tile__add {
+.tile__remove {
   position: absolute;
   right: 0;
+  top: 0;
+  padding: 10px;
+  text-align: right;
+}
+.tile__watched {
+  position: absolute;
+  right: 30px;
   top: 0;
   padding: 10px;
   text-align: right;

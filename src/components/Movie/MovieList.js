@@ -2,7 +2,23 @@ import React from "react";
 
 import classes from "./MovieList.module.css";
 
+import {GoEye, GoEyeClosed} from 'react-icons/go';
+
 const MovieList = (props) => {
+
+    const onRemoveHandler = (movie) => {
+        props.onRemoveHandler(movie);
+      };
+    
+      const onWatchedHandler = (movie) => {
+        props.onWatchedHandler(movie);
+      };
+    
+    
+      const onDetailsHandler = (movie) => {
+        console.log('movie :>> ', movie);
+      }
+
   
 
   const listMovies = props.movies.map((movie) => (
@@ -19,14 +35,15 @@ const MovieList = (props) => {
         <div className={classes.tile__title}>
           {movie.id} - {movie.title}
         </div>
-        {/* <div className={classes.tile__more} onClick={()=>onDetailsHandler(movie)}>...</div>
-          <div className={classes.tile__add} onClick={()=>onAddHandler(movie)}>+</div> */}
+        <div className={classes.tile__more} onClick={()=>onDetailsHandler(movie)}>...</div>
+        <div className={classes.tile__watched} onClick={()=>onWatchedHandler(movie)}>{movie.watched?<GoEye />:<GoEyeClosed/>}</div>
+        <div className={classes.tile__remove} onClick={()=>onRemoveHandler(movie)}>-</div>
       </div>
     </div>
   ));
   return (
-    <div className={classes.row}>
-      <div>WATCH LIST</div>
+    <div className={classes.contain}>
+      <div className={classes.row}>WATCH LIST</div>
       <div className={classes.row__inner}>{listMovies}</div>
     </div>
   );

@@ -25,13 +25,14 @@ const getGenres = (genre_ids) => {
 };
 
 function App() {
-  
-  const API_KEY = "X6vbOvQjCACWfxM0IMCGmS8u1j5mPLqL5YnoQFu99dPqn5UnSzGXOeFJ0mp7ZzbB"
-   
+  const API_KEY =
+    "X6vbOvQjCACWfxM0IMCGmS8u1j5mPLqL5YnoQFu99dPqn5UnSzGXOeFJ0mp7ZzbB";
+
   const { loginApiKey, logOut, user } = useRealmApp();
   const { db } = useMongoDB();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+
+  handleLogIn();
+
   const [movies, setMovies] = useState([]);
 
   const [refresh, setRefresh] = useState(false);
@@ -72,31 +73,49 @@ function App() {
     await loginApiKey(API_KEY);
   }
 
-  const isDuplicate = async(movie) => {
-    const dupe = await db
-    .collection("movies").findOne({ id: movie.id });
-    console.log('dupe?',dupe);
+  const isDuplicate = async (movie) => {
+    const dupe = await db.collection("movies").findOne({ id: movie.id });
+    console.log("dupe?", dupe);
 
-    return !(dupe===null);
-  }
-
+    return !(dupe === null);
+  };
 
   const onAddHandler = async (movie) => {
     console.log(`in App, adding: `, movie);
-    let dupe=await isDuplicate(movie);
-    dupe?console.log(`dupe`, movie): addMovie(movie);
-    setRefresh(st=>!st);
+    let dupe = await isDuplicate(movie);
+    dupe ? console.log(`dupe`, movie) : addMovie(movie);
+    setRefresh((st) => !st);
   };
 
-  handleLogIn();
+  const onWatchedHandler = async (movie) => {
+    await db
+      .collection("movies")
+      .updateOne({ id: movie.id }, { $set: { watched: !movie.watched } })
+      .then((result) =>
+        console.log(`Successfully flagged item with _id: ${result.insertedId}`)
+      )
+      .catch((err) => console.error(`Failed to flag item: ${err}`));
+
+  };
+
+  const onRemoveHandler = async (movie) => {
+    await db
+      .collection("movies")
+      .deleteOne({ id: movie.id })
+      .then((result) =>
+        console.log(`Successfully deleted item with _id: ${result.insertedId}`)
+      )
+      .catch((err) => console.error(`Failed to delete item: ${err}`));
+  };
 
   return user && db && user.state === "active" ? (
     <div className={classes.contain}>
       <MovieList
-        
         movies={movies}
         user={user}
         logOut={logOut}
+        onWatchedHandler={onWatchedHandler}
+        onRemoveHandler={onRemoveHandler}
       />
       <SearchMovie className={classes.row} onAddHandler={onAddHandler} />
 
@@ -110,9 +129,7 @@ function App() {
     //   setPassword={setPassword}
     //   handleLogIn={handleLogIn}
     // />
-    <>
-    {/* {handleLogIn} */}
-    </>
+    <>{/* {handleLogIn} */}</>
   );
 }
 
