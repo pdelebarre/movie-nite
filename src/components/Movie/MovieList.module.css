@@ -1,4 +1,24 @@
 
+.contain {
+  /* align-items: center;
+  width: 80%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto auto; */
+  /* grid-template-rows: auto auto 1fr 1fr 1fr auto auto; */
+    /* grid-gap:10px; */
+    /* height: calc(100vh - 10px); */
+    overflow: auto;
+    white-space:nowrap;
+    width: 1000px;
+}
+
+
+.row {
+  overflow-x: scroll;
+  width: 100%;
+}
+
 
 a:link,
 a:hover,
@@ -111,4 +131,11 @@ a:hover {
 }
 .tile:hover ~ .tile {
   transform: translate3d(125px, 0, 0);
+}
+
+.sectionname {
+  align-items: top left;
+  border-bottom: 1px solid lightgrey;
+  padding: 10px;
+  font-size: 2em;
 }

@@ -10,17 +10,17 @@ const RealmApp = ({ children }) => {
     const app = new RealmWeb.App({ id: REALM_APP_ID })
     const [user, setUser] = useState(null)
 
-    const logIn = async (email, password) => {
-        const credentials = RealmWeb.Credentials.emailPassword(email, password)
-        try {
-            await app.logIn(credentials)
-            setUser(app.currentUser)
-            return app.currentUser
-        } catch (e) {
-            setUser(null)
-            return null
-        }
-    }
+    // const logIn = async (email, password) => {
+    //     const credentials = RealmWeb.Credentials.emailPassword(email, password)
+    //     try {
+    //         await app.logIn(credentials)
+    //         setUser(app.currentUser)
+    //         return app.currentUser
+    //     } catch (e) {
+    //         setUser(null)
+    //         return null
+    //     }
+    // }
 
     const loginApiKey = async (api_key) => {
         const credentials = RealmWeb.Credentials.apiKey(api_key)

@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useMongoDB } from "./store/mongodb";
 import { useRealmApp } from "./store/realm";
 
-import classes from "./App.module.css";
+// import classes from "./App.module.css";
 
-import LogInForm from "./components/LoginForm";
+// import LogInForm from "./components/LoginForm";
 import SearchMovie from "./components/Movie/SearchMovie";
 import MovieList from "./components/Movie/MovieList";
 
@@ -109,7 +109,7 @@ function App() {
   };
 
   return user && db && user.state === "active" ? (
-    <div className={classes.contain}>
+    <div>
       <MovieList
         movies={movies}
         user={user}
@@ -117,7 +117,7 @@ function App() {
         onWatchedHandler={onWatchedHandler}
         onRemoveHandler={onRemoveHandler}
       />
-      <SearchMovie className={classes.row} onAddHandler={onAddHandler} />
+      <SearchMovie onAddHandler={onAddHandler} />
 
       {/* <TestMongo /> */}
     </div>
