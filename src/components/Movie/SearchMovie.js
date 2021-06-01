@@ -8,12 +8,6 @@ const SearchMovie = (props) => {
   const [query, setQuery] = useState("");
   const [newMovie, setNewMovie] = useState({});
 
-  const handleSubmit = () => {
-    console.log("submit", newMovie);
-    //alert(movie);
-    setNewMovie({});
-    setQuery("");
-  };
   const handleChange = (event) => {
     setQuery(event.target.value);
   };
@@ -27,13 +21,13 @@ const SearchMovie = (props) => {
   return (
     <div className={classes.contain}>
       <div className={classes.searchbar}>
-        <form onSubmit={handleSubmit}>
+        {/* <form onSubmit={handleSubmit}> */}
           <label className={classes.label}>
             Search Movie:
             <input className={classes.input} type="text" value={query} onChange={handleChange} />
           </label>
-          <input className={classes.button} type="submit" value="OK" />
-        </form>
+          {/* <input className={classes.button} type="submit" value="OK" /> */}
+        {/* </form> */}
       </div>
 
       <div className={classes.row}>

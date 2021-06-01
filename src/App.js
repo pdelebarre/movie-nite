@@ -25,7 +25,10 @@ const getGenres = (genre_ids) => {
 };
 
 function App() {
-  const { logIn, logOut, user } = useRealmApp();
+  
+  const API_KEY = "X6vbOvQjCACWfxM0IMCGmS8u1j5mPLqL5YnoQFu99dPqn5UnSzGXOeFJ0mp7ZzbB"
+   
+  const { loginApiKey, logOut, user } = useRealmApp();
   const { db } = useMongoDB();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -65,19 +68,32 @@ function App() {
   }, [user, db, refresh]);
 
   async function handleLogIn() {
-    await logIn(email, password);
+    //await logIn(email, password);
+    await loginApiKey(API_KEY);
   }
 
-  const onAddHandler = (movie) => {
+  const isDuplicate = async(movie) => {
+    const dupe = await db
+    .collection("movies").findOne({ id: movie.id });
+    console.log('dupe?',dupe);
+
+    return !(dupe===null);
+  }
+
+
+  const onAddHandler = async (movie) => {
     console.log(`in App, adding: `, movie);
-    addMovie(movie);
+    let dupe=await isDuplicate(movie);
+    dupe?console.log(`dupe`, movie): addMovie(movie);
     setRefresh(st=>!st);
   };
+
+  handleLogIn();
 
   return user && db && user.state === "active" ? (
     <div className={classes.contain}>
       <MovieList
-        className={classes.row}
+        
         movies={movies}
         user={user}
         logOut={logOut}
@@ -87,13 +103,16 @@ function App() {
       {/* <TestMongo /> */}
     </div>
   ) : (
-    <LogInForm
-      email={email}
-      setEmail={setEmail}
-      password={password}
-      setPassword={setPassword}
-      handleLogIn={handleLogIn}
-    />
+    // <LogInForm className={classes.contain}
+    //   email={email}
+    //   setEmail={setEmail}
+    //   password={password}
+    //   setPassword={setPassword}
+    //   handleLogIn={handleLogIn}
+    // />
+    <>
+    {/* {handleLogIn} */}
+    </>
   );
 }
 

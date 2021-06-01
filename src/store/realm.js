@@ -5,13 +5,25 @@ import React, { useContext, useState } from "react"
 const RealmAppContext = React.createContext(null)
 
 const RealmApp = ({ children }) => {
-    // const REALM_APP_ID = "application-1-zgoro"; 
+    const REALM_APP_ID = "application-1-zgoro"; 
     
-    const app = new RealmWeb.App({ id: "application-1-zgoro" })
+    const app = new RealmWeb.App({ id: REALM_APP_ID })
     const [user, setUser] = useState(null)
 
     const logIn = async (email, password) => {
         const credentials = RealmWeb.Credentials.emailPassword(email, password)
+        try {
+            await app.logIn(credentials)
+            setUser(app.currentUser)
+            return app.currentUser
+        } catch (e) {
+            setUser(null)
+            return null
+        }
+    }
+
+    const loginApiKey = async (api_key) => {
+        const credentials = RealmWeb.Credentials.apiKey(api_key)
         try {
             await app.logIn(credentials)
             setUser(app.currentUser)
@@ -32,7 +44,7 @@ const RealmApp = ({ children }) => {
     return (
         <RealmAppContext.Provider
             value={{
-                logIn,
+                loginApiKey,
                 logOut,
                 user,
             }}
