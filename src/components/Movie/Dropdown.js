@@ -3,13 +3,15 @@ import React, { useEffect, useState } from "react";
 
 import classes from "./Dropdown.module.css";
 
+import { TMDB_API_KEY } from "../../store/keys";
+
 const Dropdown = (props) => {
   const [results, setResults] = useState([]);
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(async () => {
       console.log("in dropdown, query = ", props.query);
-      const url = `https://api.themoviedb.org/3/search/movie?api_key=5dcf7f28a88be0edc01bbbde06f024ab&language=en-US&query=${props.query}&page=1&include_adult=false`;
+      const url = `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&language=en-US&query=${props.query}&page=1&include_adult=false`;
       try {
         const res = await fetch(url);
         const data = await res.json();

@@ -2,28 +2,18 @@ import * as RealmWeb from "realm-web"
 
 import React, { useContext, useState } from "react"
 
+import { REALM_APP_ID, MONGODB_API_KEY } from "../store/keys";
+
 const RealmAppContext = React.createContext(null)
 
 const RealmApp = ({ children }) => {
-    const REALM_APP_ID = "application-1-zgoro"; 
+ 
     
     const app = new RealmWeb.App({ id: REALM_APP_ID })
     const [user, setUser] = useState(null)
 
-    // const logIn = async (email, password) => {
-    //     const credentials = RealmWeb.Credentials.emailPassword(email, password)
-    //     try {
-    //         await app.logIn(credentials)
-    //         setUser(app.currentUser)
-    //         return app.currentUser
-    //     } catch (e) {
-    //         setUser(null)
-    //         return null
-    //     }
-    // }
-
-    const loginApiKey = async (api_key) => {
-        const credentials = RealmWeb.Credentials.apiKey(api_key)
+    const loginApiKey = async () => {
+        const credentials = RealmWeb.Credentials.apiKey(MONGODB_API_KEY)
         try {
             await app.logIn(credentials)
             setUser(app.currentUser)

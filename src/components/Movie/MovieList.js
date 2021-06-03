@@ -31,23 +31,30 @@ const MovieList = (props) => {
         <div className={classes.tile__title}>
           {movie.id} - {movie.title}
         </div>
+        <div className={classes.tile__more}>
+
         <div
-          className={classes.tile__more}
+          className={classes.tile__button}
           onClick={() => onDetailsHandler(movie)}
         >
           ...
         </div>
-        <div
-          className={classes.tile__watched}
-          onClick={() => onWatchedHandler(movie)}
-        >
-          {movie.watched ? <GoEye /> : <GoEyeClosed />}
         </div>
+        <div className={classes.tile__watched}>
+          <div
+            className={classes.tile__button}
+            onClick={() => onWatchedHandler(movie)}
+          >
+            {movie.watched ? <GoEye /> : <GoEyeClosed />}
+          </div>
+        </div>
+        <div className={classes.tile__remove}>
         <div
-          className={classes.tile__remove}
+          className={classes.tile__button}
           onClick={() => onRemoveHandler(movie)}
         >
-          -
+          X
+        </div>
         </div>
       </div>
     </div>

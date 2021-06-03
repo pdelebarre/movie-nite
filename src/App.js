@@ -2,9 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useMongoDB } from "./store/mongodb";
 import { useRealmApp } from "./store/realm";
 
-// import classes from "./App.module.css";
-
-// import LogInForm from "./components/LoginForm";
 import SearchMovie from "./components/Movie/SearchMovie";
 import MovieList from "./components/Movie/MovieList";
 
@@ -25,8 +22,8 @@ const getGenres = (genre_ids) => {
 };
 
 function App() {
-  const API_KEY =
-    "X6vbOvQjCACWfxM0IMCGmS8u1j5mPLqL5YnoQFu99dPqn5UnSzGXOeFJ0mp7ZzbB";
+  // const API_KEY =
+  //   "X6vbOvQjCACWfxM0IMCGmS8u1j5mPLqL5YnoQFu99dPqn5UnSzGXOeFJ0mp7ZzbB";
 
   const { loginApiKey, logOut, user } = useRealmApp();
   const { db } = useMongoDB();
@@ -61,7 +58,7 @@ function App() {
   useEffect(() => {
     async function wrapMovieQuery() {
       if (user && db) {
-        const authoredMovies = await db.collection("movies").find();
+        const authoredMovies = await db.collection("movies").find({},{sort:{ "watched": 1 }});
         setMovies(authoredMovies);
       }
     }
@@ -69,8 +66,8 @@ function App() {
   }, [user, db, refresh]);
 
   async function handleLogIn() {
-    //await logIn(email, password);
-    await loginApiKey(API_KEY);
+
+    await loginApiKey();
   }
 
   const isDuplicate = async (movie) => {
@@ -108,7 +105,7 @@ function App() {
       .catch((err) => console.error(`Failed to delete item: ${err}`));
   };
 
-  return user && db && user.state === "active" ? (
+  return user && db && user.state === "active" && (
     <div>
       <MovieList
         movies={movies}
@@ -121,16 +118,7 @@ function App() {
 
       {/* <TestMongo /> */}
     </div>
-  ) : (
-    // <LogInForm className={classes.contain}
-    //   email={email}
-    //   setEmail={setEmail}
-    //   password={password}
-    //   setPassword={setPassword}
-    //   handleLogIn={handleLogIn}
-    // />
-    <>{/* {handleLogIn} */}</>
-  );
+  ) 
 }
 
 export default App;
