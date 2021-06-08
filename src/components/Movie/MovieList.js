@@ -32,13 +32,12 @@ const MovieList = (props) => {
           {movie.id} - {movie.title}
         </div>
         <div className={classes.tile__more}>
-
-        <div
-          className={classes.tile__button}
-          onClick={() => onDetailsHandler(movie)}
-        >
-          ...
-        </div>
+          <div
+            className={classes.tile__button}
+            onClick={() => onDetailsHandler(movie)}
+          >
+            ...
+          </div>
         </div>
         <div className={classes.tile__watched}>
           <div
@@ -49,23 +48,24 @@ const MovieList = (props) => {
           </div>
         </div>
         <div className={classes.tile__remove}>
-        <div
-          className={classes.tile__button}
-          onClick={() => onRemoveHandler(movie)}
-        >
-          X
-        </div>
+          <div
+            className={classes.tile__button}
+            onClick={() => onRemoveHandler(movie)}
+          >
+            X
+          </div>
         </div>
       </div>
     </div>
   ));
   return (
-    <>
+    <div className={classes.contain}>
       <div className={classes.sectionname}>WATCH LIST</div>
-      <div className={classes.contain}>
-        <div className={classes.row}>{listMovies}</div>
+
+      <div className={classes.row}>
+        <div className={classes.row_inner}>{listMovies}</div>
       </div>
-    </>
+    </div>
   );
 };
 

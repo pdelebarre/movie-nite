@@ -5,7 +5,6 @@ import { useRealmApp } from "./store/realm";
 import SearchMovie from "./components/Movie/SearchMovie";
 import MovieList from "./components/Movie/MovieList";
 
-// import TestMongo from "./tests/TestMongo";
 
 import GENRES from "./resources/genres";
 
@@ -22,8 +21,6 @@ const getGenres = (genre_ids) => {
 };
 
 function App() {
-  // const API_KEY =
-  //   "X6vbOvQjCACWfxM0IMCGmS8u1j5mPLqL5YnoQFu99dPqn5UnSzGXOeFJ0mp7ZzbB";
 
   const { loginApiKey, logOut, user } = useRealmApp();
   const { db } = useMongoDB();
@@ -116,7 +113,6 @@ function App() {
       />
       <SearchMovie onAddHandler={onAddHandler} />
 
-      {/* <TestMongo /> */}
     </div>
   ) 
 }

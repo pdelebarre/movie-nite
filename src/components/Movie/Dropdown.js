@@ -51,7 +51,7 @@ const Dropdown = (props) => {
       {/* TODO: add link to preview (Modal?) */}
       <div className={classes.tile__details}>
           <div className={classes.tile__title}>
-          {movie.id} - {movie.title}
+          {movie.title}
           </div>
           <div className={classes.tile__more} onClick={()=>onDetailsHandler(movie)}>...</div>
           <div className={classes.tile__add} onClick={()=>onAddHandler(movie)}>+</div>

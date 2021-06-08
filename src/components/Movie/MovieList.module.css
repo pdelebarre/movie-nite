@@ -18,6 +18,7 @@
 .row {
   overflow-x: scroll;
   width: 100%;
+  height: 400px;
 }
 
 
@@ -162,6 +163,45 @@ a:hover {
 .sectionname {
   align-items: top left;
   border-bottom: 1px solid lightgrey;
-  padding: 10px;
+  padding-top: 50px;
+  padding-bottom: 50px;
   font-size: 2em;
+}
+
+/* Media queries */
+@media screen and (max-width:750px){
+
+  .row {
+    overflow-x: scroll;
+    width: 100%;
+    height: 250px;
+  }
+
+  .tile {
+    position: relative;
+    display: inline-block;
+    width: 150px;
+    height: 210px;
+    margin-right: 10px;
+    font-size: 20px;
+    /* cursor: pointer; */
+    transition: 450ms all;
+    transform-origin: center left;
+    color: white
+  }
+  .tile__img {
+    width: 150px;
+    height: 210px;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+
+  .sectionname {
+    align-items: top left;
+    border-bottom: 1px solid lightgrey;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 1.2em;
+  }
+  
 }
