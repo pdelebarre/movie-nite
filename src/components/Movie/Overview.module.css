@@ -1,40 +1,50 @@
-.container {
-    /* background-color: rgb(243, 219, 231); */
-    background: linear-gradient(to bottom, #FFC7D8 0%, #FFFFFF 71%, #DDEAED 100%);
-    width: 100%;
-    border-radius: 50px;
-    margin: 0px;
-    border: 0px;
-    padding: 0px;
-    box-shadow: 13px 15px 28px -3px rgba(0, 0, 0, 0.72);
+.actions {
+    text-align: right;
+}
+
+.actions button {
+    font: inherit;
+    cursor: pointer;
+    background-color: white;
+    border: 1px solid #8a2b06;
+    padding: 0.5rem 2rem;
+    border-radius: 25px;
+    margin-left: 1rem;
+}
+
+.actions button:hover,
+.actions button:active {
+    background-color: #36390d;
+    border-color: #fff2ed;
+    color: white;
+}
+
+.actions .button--alt {
+    color: #c29d8e;
+}
+
+.actions .button {
+    background-color: #9f857b;
+    color: white;
 }
 
 .poster {
     min-width: 30px;
     max-width: 25%;
     min-height: 45px;
-    border-radius: 50px;
-    float: left;
-    margin:20px;
-    padding: 0 20px 0 0;
+    border-radius: 20px;
+    /* float: left; */
+    margin: 20px;
+    /* padding: 0 20px 0 0; */
 }
 
 .overview {
+    text-align: justify;
+  text-justify: inter-word;
+    margin-left: 50px;
+    align-items: left;
     min-width: 60%;
     margin: 10px;
-    border: 10px;
+    border: 3px;
     padding: 10px;
-    /* border-radius: 50px; */
-}
-
-h2 {
-    /* border-radius: 50px; */
-    /* background-color: rgb(128, 0, 255); */
-    color: rgb(21, 19, 19);
-    text-align: right;
-    margin: 10px;
-    border: 10px;
-    padding-top: 50px;
-    padding: 5px;
-    /* box-shadow: 13px 15px 28px -3px rgba(0, 0, 0, 0.72); */
 }
