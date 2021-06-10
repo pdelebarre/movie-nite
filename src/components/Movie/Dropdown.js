@@ -3,8 +3,6 @@ import React, { useEffect, useState } from "react";
 
 import classes from "./Dropdown.module.css";
 
-import Overview from "./Overview";
-
 import { TMDB_API_KEY } from "../../store/keys";
 
 const Dropdown = (props) => {
