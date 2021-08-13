@@ -1,0 +1,31 @@
+version: "3"
+services:
+  react-app:
+    image: pdelebarre/react-app:0.0.1
+    restart: unless-stopped
+    ports: 
+      - "5980:5980"
+      - "59443:59443"
+    volumes:
+      - caddy-data:/data
+      - caddy-config:/config
+    networks:
+      - mern-app
+  api-server:
+    image: pdelebarre/api-server:0.0.1
+    restart: unless-stopped
+    env_file: ./production.env
+    ports:
+      - "59000:5000"
+    networks:
+      - mern-app
+networks:
+  mern-app:
+    driver: bridge
+volumes:
+  mongo-data:
+    driver: local
+  caddy-data:
+    driver: local
+  caddy-config:
+    driver: local
